@@ -34,6 +34,7 @@ public class Runtime {
 	      
 	        VBO triangle = new VBO();
 	        rending = new Renderer();
+	        rending.setPm(game.getPm());
 	        debugProc = GLUtil.setupDebugMessageCallback();
 	        
 	        while (!glfwWindowShouldClose(game.getWindow())) {

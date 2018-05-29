@@ -47,7 +47,7 @@ public class GameWindow {
         
         WIDTH = w;
         HEIGHT = h;
-        ProMatrix = new ProjectionMatrix(WIDTH, HEIGHT, 60, 0.1f, 10);
+        ProMatrix = new ProjectionMatrix(WIDTH, HEIGHT, 60, 0.01f, 100);
       
 	}
 	public void create() {
@@ -149,4 +149,7 @@ public class GameWindow {
     public double getLastLoopTime() {
         return lastLoopTime;
     }
+	public ProjectionMatrix getPm() {
+		return ProMatrix;
+	}
 }

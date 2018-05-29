@@ -17,6 +17,7 @@ public class ProjectionMatrix extends Matrix4f {
 		this._m11(s);
 		this._m22(-(zFar/(zFar-zNear)));
 		this._m32(this.m22()*zNear);
+		this._m23(-1);
 	}
 	public ProjectionMatrix(int w,int h, int FOV, float zNear,float zFar) {
 		this( (float) w / h,FOV,zNear,zFar);

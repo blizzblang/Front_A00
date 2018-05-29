@@ -58,10 +58,12 @@ public class ShaderProgram {
 
         return shaderId;
     }
-    public void createUniform(String uniformName) throws Exception {
+    public void createUniform(String uniformName){
         int uniformLocation = glGetUniformLocation(programId, uniformName);
         if (uniformLocation < 0) {
-            throw new Exception("Could not find uniform:" + uniformName);
+            try {
+				throw new Exception("Could not find uniform:" + uniformName);
+			} catch (Exception e) {e.printStackTrace();}
         }
         uniforms.put(uniformName, uniformLocation);
     }
