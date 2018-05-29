@@ -18,6 +18,7 @@ public class Runtime {
 	Callback debugProc;
 	public static void main(String[] args) {
 	System.out.println("VER: " + Version.getVersion());
+	System.out.println("Tan 90 = "+Math.tan(90));
 	Runtime run = new Runtime();
 	run.begin();
 

@@ -4,6 +4,8 @@ package nate.master.com;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 
+import nate.master.com.Matrixes.ProjectionMatrix;
+
 import org.lwjgl.Version;
 import static org.lwjgl.glfw.Callbacks.*;
 
@@ -21,6 +23,7 @@ public class GameWindow {
 	private float elapsedTime;
 	private boolean vsync=true;
 	private boolean resized = false;
+	public ProjectionMatrix ProMatrix;
 	public GameWindow(int w,int h) {
 	
 	     // Setup an error callback. The default implementation
@@ -44,7 +47,7 @@ public class GameWindow {
         
         WIDTH = w;
         HEIGHT = h;
-
+        ProMatrix = new ProjectionMatrix(WIDTH, HEIGHT, 60, 0.1f, 10);
       
 	}
 	public void create() {
