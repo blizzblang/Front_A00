@@ -10,7 +10,7 @@ import org.joml.Matrix4x3fc;
 import org.joml.Vector4fc;
 
 public class ViewMatrix extends Matrix4f {
-
+//
 	public ViewMatrix(float[] pos, float[] rot) {
 		this.rotate(rot[0],1,0,0);
 		this.rotate(rot[1],0,1,0);
