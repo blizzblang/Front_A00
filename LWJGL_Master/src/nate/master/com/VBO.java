@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import org.lwjgl.system.MemoryUtil;
 
-//TODO Clean this up and prepare for 3D / 2D drawing
+//TODO Clean this up and prepare for 3D / 2D drawing 
 public class VBO {
 
     private int vboId; // Verticies
