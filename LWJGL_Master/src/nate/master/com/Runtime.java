@@ -13,7 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import java.awt.Window;
 //TODO Clean up warnings.
 public class Runtime {
-	GameWindow game = new GameWindow(720,480);
+	static GameWindow game = new GameWindow(720,480);
 	Renderer rending;
 	Callback debugProc;
 	public static void main(String[] args) {
@@ -38,6 +38,7 @@ public class Runtime {
 	        debugProc = GLUtil.setupDebugMessageCallback();
 	        
 	        while (!glfwWindowShouldClose(game.getWindow())) {
+	        	rending.update();
 	        	game.tick();
 	        	//MAIN GAME LOOP
 	        	

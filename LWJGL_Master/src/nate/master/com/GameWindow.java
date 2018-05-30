@@ -47,7 +47,7 @@ public class GameWindow {
         
         WIDTH = w;
         HEIGHT = h;
-        ProMatrix = new ProjectionMatrix(WIDTH, HEIGHT, 60, 0.01f, 100);
+        ProMatrix = new ProjectionMatrix(WIDTH, HEIGHT, 60, 0.01f, 1000f);
       
 	}
 	public void create() {
@@ -151,5 +151,8 @@ public class GameWindow {
     }
 	public ProjectionMatrix getPm() {
 		return ProMatrix;
+	}
+	public boolean getKey(int a) {
+		return glfwGetKey(window, a) == GLFW_PRESS;
 	}
 }

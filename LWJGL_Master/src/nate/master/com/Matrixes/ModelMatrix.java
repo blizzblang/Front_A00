@@ -20,5 +20,8 @@ public class ModelMatrix extends Matrix4f {
 	public ModelMatrix(float x, float y,float z,float a,float b,float c) {
 		this(new float[] {x,y,z},new float[] {a,b,c});
 	}
+	public ModelMatrix() {
+		this(0, 0, 0, 0, 0, 0);
+	}
 
 }

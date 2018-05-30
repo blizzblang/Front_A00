@@ -7,7 +7,11 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+
+import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryUtil;
+
+import nate.master.com.Matrixes.ModelMatrix;
 
 //TODO Clean this up and prepare for 3D / 2D drawing  
 public class VBO {
@@ -19,17 +23,20 @@ public class VBO {
     int[] indices;
     FloatBuffer verticesBuffer; // Buffer for Vertexes
     IntBuffer indicesBuffer; // Buffer for Indices
+    ModelMatrix pos = new ModelMatrix();
 	public VBO() {
 
 	        
 			vertices = new float[]{
-			        -0.5f,  0.5f, 0.0f,
-			        -0.5f, -0.5f, 0.0f,
-			         0.5f, -0.5f, 0.0f,
-			         0.5f,  0.5f, 0.0f,
+			        -0.5f,  0.5f, 0.0f, // Top Left
+			        -0.5f, -0.5f, 0.0f, //Bottom Left
+			         0.5f, -0.5f, 0.0f, // Bottom Right
+			         0.5f,  0.5f, 0.0f, // Top right
 	            };
 			indices = new int[] {
-				       //0, 1, 3, 3, 1, 2,
+				0,3,2,
+				0,1,2
+
 			};
 	        
 	        /*
@@ -48,15 +55,12 @@ public class VBO {
 		        vboId = glGenBuffers();
 		        indId = glGenBuffers();
 	            glBindVertexArray(vaoId);	//VAO bound
-			        glBindBuffer(GL_ARRAY_BUFFER, vboId);
-				    glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_STATIC_DRAW);
-				    glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0); 
-			        
-			        
-			        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,indId);
-			        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
-			        
-			        glBindBuffer(GL_ARRAY_BUFFER, 0);
+			    glBindBuffer(GL_ARRAY_BUFFER, vboId);
+				glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_STATIC_DRAW);
+				glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0); 
+			    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,indId);
+			    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
+			    glBindBuffer(GL_ARRAY_BUFFER, 0);
 	            glBindVertexArray(0);  // VAO unbound
 	        } finally {
 	            if (verticesBuffer != null ) {
@@ -76,6 +80,7 @@ public class VBO {
 
 	        // Delete the VBO
 	        glBindBuffer(GL_ARRAY_BUFFER, 0);
+	        
 	        glDeleteBuffers(vboId);
 	        glDeleteBuffers(indId);
 	        // Delete the VAO
@@ -92,5 +97,15 @@ public class VBO {
 	//TODO Would need 3d/2d specification.
 	public int getVertexCount() {
 		return vertices.length/3;
+	}
+
+
+	public int getIndicesCount() {
+		return indices.length;
+	}
+
+
+	public Matrix4f getModelMatrix() {
+		return pos;
 	}
 }
