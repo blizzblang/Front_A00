@@ -86,6 +86,7 @@ public class GameWindow {
         glfwShowWindow(window);
         GL.createCapabilities();
         glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
+        glEnable(GL_DEPTH_TEST);
         lastLoopTime = getTime();
 	}
 

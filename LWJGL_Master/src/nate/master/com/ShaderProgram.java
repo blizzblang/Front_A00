@@ -76,7 +76,9 @@ public class ShaderProgram {
         }
     }
     //TODO Expand uniform variables and such
-    
+    public void setUniform(String uniformName, int value) {
+        glUniform1i(uniforms.get(uniformName), value);
+    }
     public void link() {
         glLinkProgram(programId);
         if (glGetProgrami(programId, GL_LINK_STATUS) == 0) {

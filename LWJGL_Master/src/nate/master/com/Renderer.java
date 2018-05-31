@@ -13,7 +13,7 @@ import nate.master.com.Matrixes.ProjectionMatrix;
 public class Renderer {
 	private ShaderProgram shaderProgram;
 	private ProjectionMatrix cP; // Current Projection
-	private Camera cam = new Camera(new float[] {0,0,0},new float[] {0,0,0});
+	private Camera cam = new Camera(new float[] {0,0,-1.5f},new float[] {0,0,0});
 	public Renderer() {
 	 	shaderProgram = new ShaderProgram();
         shaderProgram.createVertexShader(Util.loadResource("/vertex.vs"));
@@ -22,6 +22,7 @@ public class Renderer {
         shaderProgram.createUniform("projectionMatrix");
         shaderProgram.createUniform("viewMatrix");
         shaderProgram.createUniform("modelMatrix");
+        shaderProgram.createUniform("texture_sampler");
 	}
 	public void update() {
 		cam.update();
@@ -32,6 +33,8 @@ public class Renderer {
 		if(cP != null) {shaderProgram.setUniform("projectionMatrix", cP);}
 		shaderProgram.setUniform("modelMatrix", mesh.getModelMatrix());
 		shaderProgram.setUniform("viewMatrix", cam.getViewMatrix()); //TODO This isn't a good way to do this. Make a checking method to reduce calls to the Camera
+		shaderProgram.setUniform("texture_sampler", 0);
+		/*
 		glBindVertexArray(mesh.getVaoId());
 	    glEnableVertexAttribArray(0);
 	    glEnableVertexAttribArray(1);
@@ -39,7 +42,8 @@ public class Renderer {
 	    glDisableVertexAttribArray(1);
 	    glDisableVertexAttribArray(0);
 	    glBindVertexArray(0);
-
+	    */
+		mesh.render();
 	    shaderProgram.unbind();
 	
 	}
