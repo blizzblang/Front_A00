@@ -195,6 +195,7 @@ public class VBO {
 	        glDeleteVertexArrays(vaoId);
 	    }
 	 public void render() {
+		 	pos = new ModelMatrix(new float[] {0,0,0}, new float[] {45,45,45});
 		    // Activate firs texture bank
 	        glActiveTexture(GL_TEXTURE0);
 	        // Bind the texture
@@ -205,7 +206,7 @@ public class VBO {
 	        glEnableVertexAttribArray(0);
 	        glEnableVertexAttribArray(1);
 
-	        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+	        glDrawElements(GL_TRIANGLES, getIndicesCount(), GL_UNSIGNED_INT, 0);
 
 	        // Restore state
 	        glDisableVertexAttribArray(0);
