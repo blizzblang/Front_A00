@@ -4,6 +4,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import nate.master.com.Matrixes.ModelMatrix;
+import nate.master.com.VBOS.VBO;
 
 public abstract class gEntity {
 	protected ModelMatrix LRS = new ModelMatrix();
@@ -42,4 +43,5 @@ public abstract class gEntity {
 		ret.add(pointing);
 		return ret;
 	}
+	public Vector3f getVelocity() {return Velocity;}
 }

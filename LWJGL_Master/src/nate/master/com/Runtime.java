@@ -4,10 +4,12 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.Callback;
 
-import nate.master.com.Entity.Soldier;
+import nate.master.com.Entities.Soldier;
+import nate.master.com.Entity.Bullets.Bullet_8mm;
 import nate.master.com.Managers.EntityManager;
-import nate.master.com.abstracts.VBO;
+import nate.master.com.VBOS.VBO;
 
+import org.joml.Vector3f;
 import org.lwjgl.Version;
 import static org.lwjgl.glfw.Callbacks.*;
 
@@ -43,6 +45,7 @@ public class Runtime {
 	        rending.setPm(game.getPm());
 	      //  debugProc = GLUtil.setupDebugMessageCallback();
 	        EntMng.add(new Soldier());
+	        EntMng.add(new Bullet_8mm(new float[] {2,0,0}, 0, new Vector3f(-.01f,0,0)));
 	        while (!glfwWindowShouldClose(game.getWindow())) {
 	        	rending.update();
 	        	game.tick();
@@ -50,8 +53,8 @@ public class Runtime {
 	        	
 	        	//rending.ren(unit);
 	        	
-	        	EntMng.updateEnts();
-	        	EntMng.renderEnts();
+	        	EntMng.tickAll();
+	        	EntMng.renderAll();
 	       
 	        	
 	        	game.tock();

@@ -6,11 +6,11 @@ import nate.master.com.abstracts.ObjectStack;
 import nate.master.com.abstracts.gEntity;
 
 public class EntityManager extends ObjectStack<gEntity>{
-	BulletManager bullets = new  BulletManager();
+	private BulletManager bullets = new  BulletManager();
 	public EntityManager() {
 	}
 	
-	public void updateEnts() {
+	public void tickEnts() {
 		sync();
 		if(getArray() !=null)
 		for( gEntity ent : getArray()) {
@@ -24,10 +24,10 @@ public class EntityManager extends ObjectStack<gEntity>{
 			Render(ent);
 		}
 	}
-	public void Tick(gEntity a) {
+	private void Tick(gEntity a) {
 		a.tick();
 	}
-	public void Render(gEntity a) {
+	private void Render(gEntity a) {
 		Runtime.rending.ren(a.getVBO(),a.getLRS());
 	}
 
@@ -64,6 +64,14 @@ public class EntityManager extends ObjectStack<gEntity>{
 		}
 		bullets.sync();
 	}
+	public void tickAll() {
+		tickEnts();
+		bullets.tickBullets();
+	}
+	public void renderAll() {
+		renderEnts();
+		bullets.renderBullets();
+	}
 
-
+	
 }

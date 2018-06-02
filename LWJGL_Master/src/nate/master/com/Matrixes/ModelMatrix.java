@@ -7,6 +7,7 @@ import org.joml.Matrix4dc;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fc;
 import org.joml.Matrix4x3fc;
+import org.joml.Vector3f;
 import org.joml.Vector4fc;
 
 import nate.master.com.Util;
@@ -34,6 +35,10 @@ public class ModelMatrix extends Matrix4f {
 	}
 	public ModelMatrix() {
 		this(0, 0, 0, 0, 0, 0);
+	}
+	public void addPos(Vector3f a) {
+		addPos(a.x,a.y,a.z);
+		
 	}
 	public void addPos(float a[]) 
 	{
@@ -72,4 +77,5 @@ public class ModelMatrix extends Matrix4f {
 	public float[] getRot() {
 		return r;
 	}
+
 }

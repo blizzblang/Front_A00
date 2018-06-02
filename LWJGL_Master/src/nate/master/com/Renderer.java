@@ -10,7 +10,7 @@ import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryUtil;
 
 import nate.master.com.Matrixes.ProjectionMatrix;
-import nate.master.com.abstracts.VBO;
+import nate.master.com.VBOS.VBO;
 
 
 public class Renderer {

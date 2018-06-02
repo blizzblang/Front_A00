@@ -1,11 +1,10 @@
 package nate.master.com.VBOS;
 
 import nate.master.com.Texture;
-import nate.master.com.abstracts.VBO;
 
-public class SquareTex extends VBO {
-		public SquareTex() {
-			super(new Texture("blueMan32x32.png"),new float[] {			       
+public class RectTex extends VBO {
+		public RectTex(String path) {
+			super(new Texture(path.trim()),new float[] {			       
 					-0.5f,  0.5f, 0.0f,
 			        -0.5f, -0.5f, 0.0f,
 			         0.5f, -0.5f, 0.0f,

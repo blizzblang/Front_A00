@@ -1,4 +1,4 @@
-package nate.master.com.abstracts;
+package nate.master.com.VBOS;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
