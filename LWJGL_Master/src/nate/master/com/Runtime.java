@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import java.awt.Window;
 //TODO Clean up warnings.
 public class Runtime {
-	static GameWindow game = new GameWindow(720,480);
+	static GameWindow game = new GameWindow(1920,1080);
 	EntityManager EntMng = new EntityManager();
 	public static Renderer rending;
 	Callback debugProc;
@@ -45,7 +45,7 @@ public class Runtime {
 	        rending.setPm(game.getPm());
 	      //  debugProc = GLUtil.setupDebugMessageCallback();
 	        EntMng.add(new Soldier());
-	        EntMng.add(new Bullet_8mm(new float[] {2,0,0}, 0, new Vector3f(-.01f,0,0)));
+	        EntMng.add(new Bullet_8mm(new float[] {10,0,0}, 0, new Vector3f(-1.2f,0,0)));
 	        while (!glfwWindowShouldClose(game.getWindow())) {
 	        	rending.update();
 	        	game.tick();

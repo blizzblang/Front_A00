@@ -44,4 +44,14 @@ public abstract class gEntity {
 		return ret;
 	}
 	public Vector3f getVelocity() {return Velocity;}
+	public float[] getMatrixBounds() {
+		float[] ret = new float[] {1,1,1};
+		ret[0] *=LRS.getScale(null).x;
+		ret[1] *=LRS.getScale(null).y;
+		ret[2] *=LRS.getScale(null).z;
+		return ret;
+	}
+	public float getRadius() {
+		return sprite.RADIUS;
+	}
 }

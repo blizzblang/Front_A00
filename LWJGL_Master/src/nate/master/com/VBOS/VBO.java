@@ -22,6 +22,7 @@ public  abstract class VBO {
     private int indId; // Indices
     private int vaoId;
     private int texId;
+    public final float RADIUS;
     float[] vertices;
     int[] indices;
     float[] texCoords;
@@ -36,6 +37,13 @@ public  abstract class VBO {
     		vertices = verts;
     		indices = inds;
     		texCoords = texs;
+    		float mDist=0;
+    		for(int i=0;i<verts.length;i+=3) {
+    			float lDist = (float) Math.sqrt(Math.pow(verts[i], 2) + Math.pow(verts[i+1], 2));lDist = (float) Math.sqrt(Math.pow(lDist, 2)+Math.pow(verts[i+2], 2));
+    			if(lDist >= mDist)mDist = 0+lDist;
+    		}
+    		RADIUS = mDist;
+    		
 	        try {
 	        	//TODO Generalize these calls 
 	        	vaoId = glGenVertexArrays();  

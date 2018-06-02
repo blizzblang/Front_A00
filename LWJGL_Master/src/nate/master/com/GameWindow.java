@@ -52,7 +52,9 @@ public class GameWindow {
 	}
 	public void create() {
 		  // Create the window
+
         window = glfwCreateWindow(WIDTH, HEIGHT, "5252018", NULL, NULL);
+        
         if (window == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
@@ -61,6 +63,8 @@ public class GameWindow {
             this.HEIGHT = height;
             this.setResized(true);
         });
+        
+      //  glfwSetWindowMonitor(window, monitor, xpos, ypos, width, height, refreshRate);)
         // Setup a key callback. It will be called every time a key is pressed, repeated or released.
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
@@ -73,8 +77,10 @@ public class GameWindow {
         // Center our window
         glfwSetWindowPos(
                 window,
-                (vidmode.width() - WIDTH) / 2,
-                (vidmode.height() - HEIGHT) / 2
+                vidmode.width(), //Second Monitor stuff
+               - 200			//Here too
+              //  (vidmode.width() - WIDTH) / 2,
+               // (vidmode.height() - HEIGHT) / 2
         );
 
         // Make the OpenGL context current

@@ -67,11 +67,32 @@ public class EntityManager extends ObjectStack<gEntity>{
 	public void tickAll() {
 		tickEnts();
 		bullets.tickBullets();
+		handleBulletCollisions();
 	}
 	public void renderAll() {
 		renderEnts();
 		bullets.renderBullets();
 	}
 
-	
+	public void handleBulletCollisions() {
+		for(int i=0;i<this.store.size();i++) {
+			gEntity tempEntity = store.get(i);
+			
+			for(int j=0;j<bullets.getArray().size();j++) {
+				Bullet b = bullets.getArray().get(i);
+				float dX =(float) tempEntity.getLRS().getPos()[0]-b.getLRS().getPos()[0];
+			//	System.out.println("dx: "+tempEntity.getLRS().getPos()[0]+" : "+b.getLRS().getPos()[0]);
+				float dY =(float) tempEntity.getLRS().getPos()[1]-b.getLRS().getPos()[1];
+				float dZ =(float) tempEntity.getLRS().getPos()[2]-b.getLRS().getPos()[2];
+		//		System.out.println(dX +", "+dY+", "+ dZ);
+				float dist = (float)( Math.pow(dX, 2) + Math.pow(dY, 2) + Math.pow(dZ, 2));
+				float check = (float) Math.pow(tempEntity.getRadius()+b.getRadius(),2) ;
+				if(check > dist) {
+				
+				}
+				
+					
+			}
+		}
+	}
 }
