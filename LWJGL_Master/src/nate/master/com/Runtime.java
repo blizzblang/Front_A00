@@ -3,6 +3,11 @@ package nate.master.com;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.Callback;
+
+import nate.master.com.Entity.Soldier;
+import nate.master.com.Managers.EntityManager;
+import nate.master.com.abstracts.VBO;
+
 import org.lwjgl.Version;
 import static org.lwjgl.glfw.Callbacks.*;
 
@@ -14,7 +19,8 @@ import java.awt.Window;
 //TODO Clean up warnings.
 public class Runtime {
 	static GameWindow game = new GameWindow(720,480);
-	Renderer rending;
+	EntityManager EntMng = new EntityManager();
+	public static Renderer rending;
 	Callback debugProc;
 	public static void main(String[] args) {
 	System.out.println("VER: " + Version.getVersion());
@@ -32,24 +38,25 @@ public class Runtime {
 		try {
 	       
 	      
-	        VBO triangle = new VBO();
+	      
 	        rending = new Renderer();
 	        rending.setPm(game.getPm());
-	        debugProc = GLUtil.setupDebugMessageCallback();
-	        
+	      //  debugProc = GLUtil.setupDebugMessageCallback();
+	        EntMng.add(new Soldier());
 	        while (!glfwWindowShouldClose(game.getWindow())) {
 	        	rending.update();
 	        	game.tick();
-	        	//MAIN GAME LOOP
+	    
 	        	
+	        	//rending.ren(unit);
 	        	
-	        	rending.ren(triangle);
-	        	
+	        	EntMng.updateEnts();
+	        	EntMng.renderEnts();
 	       
 	        	
 	        	game.tock();
 	        }
-	        triangle.cleanup();
+	        
 	        rending.cleanup();
 			game.destroy();
 		} finally {

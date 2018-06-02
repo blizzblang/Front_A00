@@ -29,23 +29,24 @@ public class Camera {
 			boolean key_d = Runtime.game.getKey(GLFW_KEY_D);
 			boolean key_q = Runtime.game.getKey(GLFW_KEY_Q);
 			boolean key_e = Runtime.game.getKey(GLFW_KEY_E);
-			if(key_w) {
-				Pos[2]+=0.1;
-			}
-			if(key_s) {
-				Pos[2]-=0.1;
-			}
-			if(key_a) {
-				Pos[0]+=0.1;
-			}
-			if(key_d) {
-				Pos[0]-=0.1;
-			}
+			float speed=0.1f;
 			if(key_q) {
-				Rot[1]-=0.1;
+				Pos[2]+=speed;
 			}
 			if(key_e) {
-				Rot[1]+=0.1;
+				Pos[2]-=speed;
+			}
+			if(key_a) {
+				Pos[0]+=speed;
+			}
+			if(key_d) {
+				Pos[0]-=speed;
+			}
+			if(key_w) {
+				Pos[1]-=speed;
+			}
+			if(key_s) {
+				Pos[1]+=speed;
 			}
 		}
 		

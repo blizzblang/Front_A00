@@ -5,9 +5,12 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+
+import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryUtil;
 
 import nate.master.com.Matrixes.ProjectionMatrix;
+import nate.master.com.abstracts.VBO;
 
 
 public class Renderer {
@@ -27,22 +30,13 @@ public class Renderer {
 	public void update() {
 		cam.update();
 	}
-	public void ren(VBO mesh){
+	public void ren(VBO mesh,Matrix4f a){
 		
 		shaderProgram.bind();
 		if(cP != null) {shaderProgram.setUniform("projectionMatrix", cP);}
-		shaderProgram.setUniform("modelMatrix", mesh.getModelMatrix());
+		shaderProgram.setUniform("modelMatrix",a);
 		shaderProgram.setUniform("viewMatrix", cam.getViewMatrix()); //TODO This isn't a good way to do this. Make a checking method to reduce calls to the Camera
 		shaderProgram.setUniform("texture_sampler", 0);
-		/*
-		glBindVertexArray(mesh.getVaoId());
-	    glEnableVertexAttribArray(0);
-	    glEnableVertexAttribArray(1);
-	    glDrawElements(GL_TRIANGLES, mesh.getIndicesCount(),GL_UNSIGNED_INT,0);
-	    glDisableVertexAttribArray(1);
-	    glDisableVertexAttribArray(0);
-	    glBindVertexArray(0);
-	    */
 		mesh.render();
 	    shaderProgram.unbind();
 	

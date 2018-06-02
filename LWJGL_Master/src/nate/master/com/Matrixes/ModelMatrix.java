@@ -9,19 +9,67 @@ import org.joml.Matrix4fc;
 import org.joml.Matrix4x3fc;
 import org.joml.Vector4fc;
 
+import nate.master.com.Util;
+
 public class ModelMatrix extends Matrix4f {
-	
+	float[] p;
+	float[] r;
 	public ModelMatrix(float[] pos, float[] rot) {
-		this.rotate(rot[0],1,0,0);
-		this.rotate(rot[1],0,1,0);
-		this.rotate(rot[2],0,0,1);
-		this.translate(pos[0], pos[1], pos[2]);
+		p=Util.arrayCopy(pos, 3);
+		r=Util.arrayCopy(rot, 3);
+		refresh();
 	}
 	public ModelMatrix(float x, float y,float z,float a,float b,float c) {
 		this(new float[] {x,y,z},new float[] {a,b,c});
 	}
+	private void refresh() {
+		this.identity();
+		r[0]%=360;
+		r[1]%=360;
+		r[2]%=360;
+		this.rotate(r[0],1,0,0);
+		this.rotate(r[1],0,1,0);
+		this.rotate(r[2],0,0,1);
+		this.translate(p[0], p[1], p[2]);
+	}
 	public ModelMatrix() {
 		this(0, 0, 0, 0, 0, 0);
 	}
-
+	public void addPos(float a[]) 
+	{
+		addPos(a[0],a[1],a[2]);
+	}
+	public void addPos(float x,float y,float z) {
+		p[0]+=x;
+		p[1]+=y;
+		p[2]+=z;
+		
+		refresh();
+	}
+	public void setPos(float x,float y,float z) {setPos(new float[]{x,y,z});}
+	public void setPos(float[] pos) {
+		p=Util.arrayCopy(pos, 3);
+		
+		refresh();
+	}
+	public void addRot(float[] a) {
+		addRot(a[0],a[1],a[2]);
+	}
+	public void addRot(float x,float y,float z) {
+		r[0]+=x;
+		r[1]+=y;
+		r[2]+=z;
+		
+		refresh();
+	}
+	public void setRot(float x,float y,float z) {
+		r=new float[] {x,y,z};
+		refresh();
+	}
+	public float[] getPos() {
+		return p;
+	}
+	public float[] getRot() {
+		return r;
+	}
 }

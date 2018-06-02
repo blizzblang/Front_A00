@@ -68,6 +68,10 @@ public class ShaderProgram {
         uniforms.put(uniformName, uniformLocation);
     }
     public void setUniform(String uniformName, Matrix4f value) {
+    	if(!uniforms.containsKey(uniformName)) {
+    		System.err.println("Uniform not found! ");
+    		System.exit(-1); //TODO Error Codes PLZ
+    	}
         try (MemoryStack stack = MemoryStack.stackPush()) {
             // Dump the matrix into a float buffer
             FloatBuffer fb = stack.mallocFloat(16);
