@@ -6,11 +6,14 @@ import de.matthiasmann.twl.utils.PNGDecoder.Format;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 public class Texture {
-
+static HashMap<String,Integer> TEX = new HashMap<String,Integer>();
     private final int id;
 
     public Texture(String fileName) {
@@ -19,6 +22,7 @@ public class Texture {
 
     public Texture(int id) {
         this.id = id;
+
     }
 
     public void bind() {
@@ -30,6 +34,7 @@ public class Texture {
     }
 
     private static int loadTexture(String fileName){
+    	if(TEX.containsKey(fileName))return TEX.get(fileName);
         // Load Texture file
         PNGDecoder decoder = null;
 		try {
@@ -63,6 +68,7 @@ public class Texture {
                 GL_RGBA, GL_UNSIGNED_BYTE, buf);
         // Generate Mip Map
         glGenerateMipmap(GL_TEXTURE_2D);
+        TEX.put(fileName, textureId);
         return textureId;
     }
 

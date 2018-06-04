@@ -13,8 +13,8 @@ import org.joml.Vector4fc;
 import nate.master.com.Util;
 
 public class ModelMatrix extends Matrix4f {
-	float[] p;
-	float[] r;
+	float[] p = new float[] {0,0,0};
+	float[] r = new float[] {0,0,0};;
 	float[] s = new float[] {1,1,1};
 	public ModelMatrix(float[] pos, float[] rot) {
 		p=Util.arrayCopy(pos, 3);

@@ -1,7 +1,7 @@
 package nate.master.com.Managers;
 
 import nate.master.com.Runtime;
-import nate.master.com.Entity.Bullet;
+import nate.master.com.abstracts.Bullet;
 import nate.master.com.abstracts.ObjectStack;
 import nate.master.com.abstracts.gEntity;
 

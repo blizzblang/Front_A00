@@ -211,7 +211,7 @@ public  abstract class VBO {
 	        glDisableVertexAttribArray(0);
 	        glDisableVertexAttribArray(1);
 	        glBindVertexArray(0);
-	        glDisable(GL_BLEND);
+	       glDisable(GL_BLEND);
 	        
 	 }
 	public int getVaoId() {

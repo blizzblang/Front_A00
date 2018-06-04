@@ -1,9 +1,8 @@
-package nate.master.com.Entity;
+package nate.master.com.abstracts;
 
 import org.joml.Vector3f;
 
 import nate.master.com.VBOS.VBO;
-import nate.master.com.abstracts.gEntity;
 
 public abstract class Bullet extends gEntity{
 	

@@ -2,10 +2,12 @@ package nate.master.com;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Util {
 	public final static float[] UP = new float[] {0,1,0};
+
 	  public static String loadResource(String fileName) {
 	        String result="";
 	         
@@ -14,7 +16,7 @@ public class Util {
 	        
 	            result = scanner.useDelimiter("\\A").next();
 	        } catch (ClassNotFoundException | IOException e) {e.printStackTrace();}
-	        return result;
+	      return result;
 	    }
 	  public static float[] arrayCopy(float[] src, int limit) {
 		  float[] ret=new float[src.length];

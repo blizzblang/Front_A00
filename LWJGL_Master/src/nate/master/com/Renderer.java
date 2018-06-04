@@ -16,7 +16,7 @@ import nate.master.com.VBOS.VBO;
 public class Renderer {
 	private ShaderProgram shaderProgram;
 	private ProjectionMatrix cP; // Current Projection
-	private Camera cam = new Camera(new float[] {0,0,-1.5f},new float[] {0,0,0});
+	private Camera cam = new Camera(new float[] {0,0,-3f},new float[] {0,0,0});
 	public Renderer() {
 	 	shaderProgram = new ShaderProgram();
         shaderProgram.createVertexShader(Util.loadResource("/vertex.vs"));
@@ -49,6 +49,10 @@ public class Renderer {
 	}
 	public void setPm(ProjectionMatrix a) {
 		cP = a;
+		
+	}
+	public Camera getCamera() {
+		return cam;
 		
 	}
 }

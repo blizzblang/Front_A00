@@ -1,15 +1,21 @@
 package nate.master.com.Managers;
 
+import org.joml.Vector3f;
+
 import nate.master.com.Runtime;
-import nate.master.com.Entity.Bullet;
+import nate.master.com.abstracts.WorldTile;
+import nate.master.com.abstracts.Bullet;
 import nate.master.com.abstracts.ObjectStack;
 import nate.master.com.abstracts.gEntity;
 
 public class EntityManager extends ObjectStack<gEntity>{
 	private BulletManager bullets = new  BulletManager();
+	private TileManager tiles = new TileManager(64,64,true,new float[] {0,0,-0.1f});
 	public EntityManager() {
 	}
-	
+	public void init() {
+		tiles.generateTileMap();
+	}
 	public void tickEnts() {
 		sync();
 		if(getArray() !=null)
@@ -26,6 +32,11 @@ public class EntityManager extends ObjectStack<gEntity>{
 	}
 	private void Tick(gEntity a) {
 		a.tick();
+		Vector3f p = a.handleMotion();
+		float dx=p.x;
+		float dy=p.y;
+		float dz=p.z;
+		a.getLRS().addPos(dx, dy, dz);
 	}
 	private void Render(gEntity a) {
 		Runtime.rending.ren(a.getVBO(),a.getLRS());
@@ -43,6 +54,9 @@ public class EntityManager extends ObjectStack<gEntity>{
 			for(int i=0;i<ad.size();i++) {
 				if(ad.get(i) instanceof Bullet) {
 					bullets.add((Bullet)ad.get(i));
+				}
+				else if(ad.get(i) instanceof WorldTile) {
+					tiles.add((WorldTile) ad.get(i));
 				}
 				else {
 					store.add(ad.get(i));
@@ -67,13 +81,25 @@ public class EntityManager extends ObjectStack<gEntity>{
 	public void tickAll() {
 		tickEnts();
 		bullets.tickBullets();
-		handleBulletCollisions();
+		tiles.tickTiles();
+		//handleBulletCollisions();
 	}
 	public void renderAll() {
+		
+		tiles.renderTiles(Runtime.rending.getCamera());
 		renderEnts();
 		bullets.renderBullets();
+	
 	}
-
+	public void checkForRemoval(gEntity a) {
+		if(a.ttlEnabled()) {
+			a.setTTL((float) (a.getTTl() - Runtime.game.getLastLoopTime()/1000));
+			if(a.getTTl() <= 0) {
+				rem(a);
+				a.setTTL(0);
+			}
+		}
+	}
 	public void handleBulletCollisions() {
 		for(int i=0;i<this.store.size();i++) {
 			gEntity tempEntity = store.get(i);
@@ -88,7 +114,7 @@ public class EntityManager extends ObjectStack<gEntity>{
 				float dist = (float)( Math.pow(dX, 2) + Math.pow(dY, 2) + Math.pow(dZ, 2));
 				float check = (float) Math.pow(tempEntity.getRadius()+b.getRadius(),2) ;
 				if(check > dist) {
-				
+					//TODO Fix bullet collision.
 				}
 				
 					
