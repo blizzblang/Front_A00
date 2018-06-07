@@ -7,8 +7,9 @@ import org.lwjgl.system.Callback;
 import nate.master.com.Entities.Soldier;
 import nate.master.com.Entity.Bullets.Bullet_8mm;
 import nate.master.com.Managers.EntityManager;
+import nate.master.com.Managers.SuperManager;
 import nate.master.com.VBOS.VBO;
-import nate.master.com.abstracts.WorldTile;
+import nate.master.com.abstracts.TileMap;
 
 import org.joml.Vector3f;
 import org.lwjgl.Version;
@@ -22,7 +23,9 @@ import java.awt.Window;
 //TODO Clean up warnings.
 public class Runtime {
 	public static GameWindow game = new GameWindow(1920,1080);
-	EntityManager EntMng = new EntityManager();
+	public static SuperManager GameManager = new SuperManager();
+	
+	
 	public static Renderer rending;
 	Callback debugProc;
 	public static void main(String[] args) {
@@ -41,16 +44,16 @@ public class Runtime {
 		try {
 	        rending = new Renderer();
 	        rending.setPm(game.getPm());
-	        EntMng.init();
-	      //  debugProc = GLUtil.setupDebugMessageCallback();
+	        GameManager.init();
+	   
 	        Soldier aS0 = new Soldier();
-	       // rending.getCamera().setFollow(aS0);
-	        EntMng.add(aS0);
-	        EntMng.add(new Bullet_8mm(new float[] {10,0,0}, 0, new Vector3f(-0.25f,0,0)));
+	      
+	        GameManager.add(aS0);
+	        GameManager.add(new Bullet_8mm(new float[] {10,0,0}, 0, new Vector3f(-0.25f,0,0)));
 	        int size=10;
 	        for(int x=0;x<size;x++)
 	        	for(int y=0;y<size;y++) {
-	        		EntMng.add(new WorldTile(new float[] {x-size/2,y-size/2,-.01f}));
+	        		GameManager.add(new TileMap(new float[] {x-size/2,y-size/2,-.01f}));
 	        	}
 	        while (!glfwWindowShouldClose(game.getWindow())) {
 	        	rending.update();
@@ -59,8 +62,8 @@ public class Runtime {
 	        	
 	        	//rending.ren(unit);
 	        	
-	        	EntMng.tickAll();
-	        	EntMng.renderAll();
+	        	GameManager.tickAll();
+	        	GameManager.renderAll();
 	       
 	        	
 	        	game.tock();

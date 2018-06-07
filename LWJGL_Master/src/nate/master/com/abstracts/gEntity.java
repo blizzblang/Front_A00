@@ -1,3 +1,4 @@
+
 package nate.master.com.abstracts;
 
 import org.joml.Vector2f;
@@ -6,7 +7,7 @@ import org.joml.Vector3f;
 import nate.master.com.Matrixes.ModelMatrix;
 import nate.master.com.VBOS.VBO;
 
-public abstract class gEntity {
+public class gEntity {
 	protected ModelMatrix LRS = new ModelMatrix();
 	protected boolean TTLenabled=false;
 	protected float TTL=0; // Time to live, in seconds.
@@ -33,7 +34,7 @@ public abstract class gEntity {
 		move = null;
 		LRS.setRot(pointing.x, pointing.y, pointing.z);
 	}
-	public abstract void ltick();
+	
 	public VBO getVBO() {return sprite;}
 	public Vector3f handleMotion() {
 		Vector3f ret = new Vector3f(0,0,0);

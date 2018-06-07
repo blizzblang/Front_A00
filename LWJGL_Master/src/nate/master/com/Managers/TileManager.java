@@ -2,17 +2,17 @@ package nate.master.com.Managers;
 
 import nate.master.com.Camera;
 import nate.master.com.Runtime;
-import nate.master.com.abstracts.WorldTile;
+import nate.master.com.abstracts.TileMap;
 import nate.master.com.abstracts.ObjectStack;
 import nate.master.com.abstracts.gEntity;
 
 
-public class TileManager extends ObjectStack<WorldTile>{
+public class TileManager extends ObjectStack<TileMap>{
 	final float[] startPos;
 	final boolean centered;
 	final int xLimit;
 	final int yLimit;
-	WorldTile[][] tileMap;
+	TileMap[][] tileMap;
 	public TileManager(int a,int b,boolean c,float[] sp) {
 		centered=c;
 		xLimit=a;
@@ -21,7 +21,7 @@ public class TileManager extends ObjectStack<WorldTile>{
 		startPos=sp;
 		else
 		startPos=new float[] {sp[0]-xLimit/2,sp[1]-yLimit/2,sp[2]};
-		tileMap= new WorldTile[xLimit][yLimit];
+		tileMap= new TileMap[xLimit][yLimit];
 		
 	}
 	public void generateTileMap() {
@@ -39,7 +39,7 @@ public class TileManager extends ObjectStack<WorldTile>{
 					pR[2] = startPos[2];
 				}
 				//System.out.println(x+" "+y);
-				tileMap[x][y] = new WorldTile(pR);
+				tileMap[x][y] = new TileMap(pR);
 				
 			}
 		
@@ -52,7 +52,7 @@ public class TileManager extends ObjectStack<WorldTile>{
 	public void tickTiles() {
 		sync();
 		if(getArray() !=null)
-		for( WorldTile ent : getArray()) {
+		for( TileMap ent : getArray()) {
 			Tick(ent);
 		
 
@@ -71,15 +71,15 @@ public class TileManager extends ObjectStack<WorldTile>{
 			}
 		
 	}
-	private WorldTile getWorldTile(int x,int y) {
+	private TileMap getWorldTile(int x,int y) {
 		if(x < 0 || x >= xLimit || y < 0 || y >= yLimit) return null;
 		return tileMap[x][y];
 	}
-	private void Render(WorldTile a) {
+	private void Render(TileMap a) {
 		if(a!=null)
 		Runtime.rending.ren(a.getVBO(),a.getLRS());
 	}
-	private void Tick(WorldTile a) {
+	private void Tick(TileMap a) {
 		a.ltick();
 	}
 }

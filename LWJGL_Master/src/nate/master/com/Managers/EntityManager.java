@@ -3,7 +3,7 @@ package nate.master.com.Managers;
 import org.joml.Vector3f;
 
 import nate.master.com.Runtime;
-import nate.master.com.abstracts.WorldTile;
+import nate.master.com.abstracts.TileMap;
 import nate.master.com.abstracts.Bullet;
 import nate.master.com.abstracts.ObjectStack;
 import nate.master.com.abstracts.gEntity;
@@ -55,8 +55,8 @@ public class EntityManager extends ObjectStack<gEntity>{
 				if(ad.get(i) instanceof Bullet) {
 					bullets.add((Bullet)ad.get(i));
 				}
-				else if(ad.get(i) instanceof WorldTile) {
-					tiles.add((WorldTile) ad.get(i));
+				else if(ad.get(i) instanceof TileMap) {
+					tiles.add((TileMap) ad.get(i));
 				}
 				else {
 					store.add(ad.get(i));
